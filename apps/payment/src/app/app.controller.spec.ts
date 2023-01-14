@@ -14,10 +14,10 @@ describe('AppController', () => {
   });
 
   describe('getData', () => {
-    it('should return "Welcome to microservices-monorepo!"', () => {
+    it('should return "Welcome to payment!"', () => {
       const appController = app.get<AppController>(AppController);
       expect(appController.getData()).toEqual({
-        message: 'Welcome to microservices-monorepo!',
+        message: 'Welcome to payment!',
       });
     });
   });

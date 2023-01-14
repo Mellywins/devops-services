@@ -14,10 +14,8 @@ describe('AppService', () => {
   });
 
   describe('getData', () => {
-    it('should return "Welcome to microservices-monorepo!"', () => {
-      expect(service.getData()).toEqual({
-        message: 'Welcome to microservices-monorepo!',
-      });
+    it('should return "Welcome to order!"', () => {
+      expect(service.getData()).toEqual({ message: 'Welcome to order!' });
     });
   });
 });
