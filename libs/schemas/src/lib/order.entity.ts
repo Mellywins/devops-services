@@ -1,11 +1,12 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument } from 'mongoose';
+import { Type } from 'class-transformer';
+import { HydratedDocument, ObjectId } from 'mongoose';
+import { PaymentOption, PaymentOptionSchema } from './payment.entity';
 
 export type OrderDocument = HydratedDocument<Order>;
 @Schema()
 export class Order {
-  @Prop()
-  id: number;
+  _id: ObjectId;
   @Prop()
   name: string;
   @Prop()
@@ -14,5 +15,9 @@ export class Order {
   quantity: number;
   @Prop()
   status: string;
+
+  @Prop({ type: PaymentOptionSchema })
+  @Type(() => PaymentOption)
+  payment: PaymentOption;
 }
 export const OrderSchema = SchemaFactory.createForClass(Order);
