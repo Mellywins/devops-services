@@ -1,6 +1,6 @@
 import { Inject, Injectable, Logger } from '@nestjs/common';
-import { ClientProxy } from '@nestjs/microservices';
-import { retry, tap } from 'rxjs';
+import { ClientProxy, RpcException } from '@nestjs/microservices';
+import { catchError, retry, tap, throwError } from 'rxjs';
 import { MESSAGING_SERVICE_TOKEN } from './constants';
 import { CreateOrderDto, GetOrderDto } from './dtos/orders.dto';
 
@@ -23,7 +23,11 @@ export class AppService {
       tap((order) =>
         this.logger.verbose('Order created: ' + JSON.stringify(order))
       ),
-      retry(3)
+      retry(3),
+      catchError((err) => {
+        this.logger.error(err);
+        return throwError(() => new RpcException('Error creating order'));
+      })
     );
   }
 }

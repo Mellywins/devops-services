@@ -8,7 +8,8 @@ export interface OrderConfig {
   MONGO_URL: string;
   ORDER_SERVICE_HOST: string;
   ORDER_SERVICE_PORT: number;
-  REDIS_URL: string;
+  REDIS_HOST: string;
+  REDIS_PORT: number;
 }
 export const orderSchema =
   process.env.ENV === 'dev'
@@ -18,7 +19,8 @@ export const orderSchema =
         MONGO_URL: Joi.string().default('mongodb://localhost:27017/order'),
         ORDER_SERVICE_HOST: Joi.string().default('localhost'),
         ORDER_SERVICE_PORT: Joi.number().default(3004),
-        REDIS_URL: Joi.string().default('redis://localhost:6379'),
+        REDIS_HOST: Joi.string().default('localhost'),
+        REDIS_PORT: Joi.number().default(6379),
       })
     : Joi.object<OrderConfig>({
         APP_PORT: Joi.number().required(),
@@ -26,7 +28,8 @@ export const orderSchema =
         MONGO_URL: Joi.string().required(),
         ORDER_SERVICE_HOST: Joi.string().required(),
         ORDER_SERVICE_PORT: Joi.number().required(),
-        REDIS_URL: Joi.string().required(),
+        REDIS_HOST: Joi.string().required(),
+        REDIS_PORT: Joi.number().required(),
       });
 export const orderCfgSymbol = '@my-workspace/order:config';
 export const orderConfig = registerAs<OrderConfig>(orderCfgSymbol, () =>

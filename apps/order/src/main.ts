@@ -9,7 +9,7 @@ import { NestFactory } from '@nestjs/core';
 import { Transport } from '@nestjs/microservices';
 
 import { AppModule } from './app/app.module';
-import { orderCfgSymbol, OrderConfig, orderConfig } from './app/config';
+import { orderCfgSymbol, OrderConfig } from './app/config';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -20,12 +20,12 @@ async function bootstrap() {
   const ms = (await app).connectMicroservice({
     transport: Transport.REDIS,
     options: {
-      url: appConfig.REDIS_URL.match(/redis:\/\/(.*)/)[1],
+      url: `redis://${appConfig.REDIS_HOST}:${appConfig.REDIS_PORT}`,
     },
   });
   ms.listen().then(() =>
     Logger.log(
-      `🚀 Microservice is exchanging messages on: ${appConfig.REDIS_URL}`
+      `🚀 Microservice is exchanging messages on: redis://${appConfig.REDIS_HOST}:${appConfig.REDIS_PORT}`
     )
   );
   await app.listen(APP_PORT);

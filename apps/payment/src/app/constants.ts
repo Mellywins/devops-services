@@ -5,8 +5,7 @@ import Joi = require('joi');
 export interface PaymentConfig {
   APP_PORT: number;
   APP_HOST: string;
-  REDIS_HOST: string;
-  REDIS_PORT: number;
+  REDIS_URL: string;
   MONGO_URL: string;
 }
 
@@ -15,15 +14,13 @@ export const paymentSchema =
     ? Joi.object<PaymentConfig>({
         APP_PORT: Joi.number().default(3002),
         APP_HOST: Joi.string().default('localhost'),
-        REDIS_HOST: Joi.string().default('localhost'),
-        REDIS_PORT: Joi.number().default(6379),
+        REDIS_URL: Joi.string().default('redis://localhost:6379'),
         MONGO_URL: Joi.string().default('mongodb://localhost:27017/payment'),
       })
     : Joi.object<PaymentConfig>({
         APP_PORT: Joi.number().required(),
         APP_HOST: Joi.string().required(),
-        REDIS_HOST: Joi.string().required(),
-        REDIS_PORT: Joi.number().required(),
+        REDIS_URL: Joi.string().required(),
         MONGO_URL: Joi.string().required(),
       });
 
