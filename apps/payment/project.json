@@ -14,7 +14,8 @@
         "main": "apps/payment/src/main.ts",
         "tsConfig": "apps/payment/tsconfig.app.json",
         "assets": ["apps/payment/src/assets"],
-        "webpackConfig": "apps/payment/webpack.config.js"
+        "webpackConfig": "apps/payment/webpack.config.js",
+        "generatePackageJson": true
       },
       "configurations": {
         "production": {

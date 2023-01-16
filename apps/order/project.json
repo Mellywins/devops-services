@@ -14,7 +14,8 @@
         "main": "apps/order/src/main.ts",
         "tsConfig": "apps/order/tsconfig.app.json",
         "assets": ["apps/order/src/assets"],
-        "webpackConfig": "apps/order/webpack.config.js"
+        "webpackConfig": "apps/order/webpack.config.js",
+        "generatePackageJson": true
       },
       "configurations": {
         "production": {
